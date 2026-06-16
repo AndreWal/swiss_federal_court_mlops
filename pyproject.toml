@@ -1,0 +1,27 @@
+[project]
+name = "legal-ml"
+version = "0.1.0"
+description = "Legal machine learning data pipeline"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx[http2]",
+    "beautifulsoup4",
+    "datetime",
+    "lxml",
+    "pandas",
+    "pyarrow",
+    "sqlalchemy",
+    "parsel",
+    "psycopg[binary]",
+    "python-dotenv",
+    "pydantic",
+    "tqdm",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+    "mypy",
+    "ipykernel",
+]

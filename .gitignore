@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Local virtual environment
+.venv/
+
+# Local configuration
+.env
+
+# Editor state
+.vscode/
+
+# Local agent/session state
+.agents/
+.codex/
+
+# Generated pipeline data
+data/raw/
+data/interim/
+data/processed/
+data/ground_truth/
+
+# Runtime scratch
+sandbox/
