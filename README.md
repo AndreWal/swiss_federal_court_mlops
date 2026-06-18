@@ -225,14 +225,14 @@ make compare-ground-truth
 
 The current local comparison outputs are based on the current
 `data/processed/scd_annotations.parquet`. The current local data directory
-contains 76,465 raw HTML files and 75,932 extracted text JSON files, per-case
+contains 80,715 raw HTML files and 80,533 extracted text JSON files, per-case
 annotation JSON files, and aggregate annotation rows. Of those annotated
 predictions in the aggregate parquet:
 
-- 75,932 predictions were compared.
-- 71,508 rows matched a ground-truth row on `docref` and `date`.
-- 4,424 rows had no matching ground-truth row and are marked as `missing_ground_truth`.
-- The matched rows have 465,228 field-level mismatches across all compared columns.
+- 80,533 predictions were compared.
+- 76,096 rows matched a ground-truth row on `docref` and `date`.
+- 4,437 rows had no matching ground-truth row and are marked as `missing_ground_truth`.
+- The matched rows have 500,291 field-level mismatches across all compared columns.
 - Exact-match fields in the matched subset: `division`, `division_type`,
   `doi_version`, `proc_type`, `year`.
 - The earlier large `merged_cases` disagreement was caused by scanning the full
@@ -252,31 +252,31 @@ Selected match rates for substantively relevant variables:
 
 | Field | Matches / Matched Rows | Match Rate |
 | --- | ---: | ---: |
-| `division` | 71,508 / 71,508 | 100.0% |
-| `division_type` | 71,508 / 71,508 | 100.0% |
-| `proc_type` | 71,508 / 71,508 | 100.0% |
-| `merged_cases` | 71,504 / 71,508 | 100.0% |
-| `language` | 71,209 / 71,508 | 99.6% |
-| `source_date` | 71,154 / 71,508 | 99.5% |
-| `proc_duration` | 71,142 / 71,508 | 99.5% |
-| `leading_case` | 68,831 / 71,508 | 96.3% |
-| `source_canton` | 68,402 / 71,508 | 95.7% |
-| `outcome_binary` | 67,379 / 71,508 | 94.2% |
-| `n_judges` | 65,902 / 71,508 | 92.2% |
-| `app_class` | 64,850 / 71,508 | 90.7% |
-| `outcome` | 63,921 / 71,508 | 89.4% |
-| `issue` | 62,656 / 71,508 | 87.6% |
-| `app_represented` | 61,474 / 71,508 | 86.0% |
-| `resp_represented` | 57,597 / 71,508 | 80.5% |
-| `resp_class` | 55,586 / 71,508 | 77.7% |
-| `topic` | 54,768 / 71,508 | 76.6% |
-| `area_general` | 50,895 / 71,508 | 71.2% |
-| `area_intermediate` | 42,968 / 71,508 | 60.1% |
-| `cited_bger` | 42,067 / 71,508 | 58.8% |
-| `area_detailed` | 39,846 / 71,508 | 55.7% |
-| `n_cited_bger` | 34,076 / 71,508 | 47.7% |
-| `n_cited_bge` | 32,733 / 71,508 | 45.8% |
-| `cited_bge` | 31,801 / 71,508 | 44.5% |
+| `division` | 76,096 / 76,096 | 100.0% |
+| `division_type` | 76,096 / 76,096 | 100.0% |
+| `proc_type` | 76,096 / 76,096 | 100.0% |
+| `merged_cases` | 76,092 / 76,096 | 100.0% |
+| `language` | 75,784 / 76,096 | 99.6% |
+| `source_date` | 75,726 / 76,096 | 99.5% |
+| `proc_duration` | 75,714 / 76,096 | 99.5% |
+| `leading_case` | 73,261 / 76,096 | 96.3% |
+| `source_canton` | 72,780 / 76,096 | 95.6% |
+| `outcome_binary` | 71,738 / 76,096 | 94.3% |
+| `n_judges` | 70,207 / 76,096 | 92.3% |
+| `app_class` | 68,916 / 76,096 | 90.6% |
+| `outcome` | 68,064 / 76,096 | 89.4% |
+| `issue` | 66,828 / 76,096 | 87.8% |
+| `app_represented` | 65,427 / 76,096 | 86.0% |
+| `resp_represented` | 61,158 / 76,096 | 80.4% |
+| `resp_class` | 59,076 / 76,096 | 77.6% |
+| `topic` | 58,357 / 76,096 | 76.7% |
+| `area_general` | 54,037 / 76,096 | 71.0% |
+| `area_intermediate` | 45,550 / 76,096 | 59.9% |
+| `cited_bger` | 42,165 / 76,096 | 55.4% |
+| `area_detailed` | 42,295 / 76,096 | 55.6% |
+| `n_cited_bger` | 34,143 / 76,096 | 44.9% |
+| `n_cited_bge` | 34,712 / 76,096 | 45.6% |
+| `cited_bge` | 33,780 / 76,096 | 44.4% |
 
 These numbers are a diagnostic snapshot, not a full-dataset quality statement.
 Regenerate them after a full annotation run with:
