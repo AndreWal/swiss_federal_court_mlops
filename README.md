@@ -225,26 +225,26 @@ make compare-ground-truth
 
 The current local comparison outputs are based on the current
 `data/processed/scd_annotations.parquet`. The current local data directory
-contains 55,652 raw HTML files and 55,334 extracted text JSON files, per-case
+contains 76,465 raw HTML files and 75,932 extracted text JSON files, per-case
 annotation JSON files, and aggregate annotation rows. Of those annotated
 predictions in the aggregate parquet:
 
-- 55,334 predictions were compared.
-- 50,939 rows matched a ground-truth row on `docref` and `date`.
-- 4,395 rows had no matching ground-truth row and are marked as `missing_ground_truth`.
-- The matched rows have 306,839 field-level mismatches across all compared columns.
+- 75,932 predictions were compared.
+- 71,508 rows matched a ground-truth row on `docref` and `date`.
+- 4,424 rows had no matching ground-truth row and are marked as `missing_ground_truth`.
+- The matched rows have 465,228 field-level mismatches across all compared columns.
 - Exact-match fields in the matched subset: `division`, `division_type`,
   `doi_version`, `proc_type`, `year`.
 - The earlier large `merged_cases` disagreement was caused by scanning the full
   judgment body for docket citations. The parser now only uses the judgment head,
-  and `merged_cases` has 3 mismatches in the matched subset.
+  and `merged_cases` has 4 mismatches in the matched subset.
 - Most unmatched rows are legacy-style docket numbers from 2006-2008, such as
   `2007.I_*`, `2007.U_*`, `1A_*`, `2P_*`, `4C_*`, `5P_*`, `6P_*`, and `6S_*`.
   These are not matched because the SCD ground-truth dataset primarily covers
   ordinary dossiers under the Federal Supreme Court Act and does not include
   many of these legacy-format cases.
 - The largest remaining substantive disagreements are in area labels, party
-  representation/class labels, outcome nuance, topic/issue text, and BGE
+  representation/class labels, outcome nuance, topic/issue text, and BGE/BGer
   citation counts. `url` and `length` are intentionally omitted below because
   they are not useful substantive coding-quality indicators.
 
@@ -252,29 +252,31 @@ Selected match rates for substantively relevant variables:
 
 | Field | Matches / Matched Rows | Match Rate |
 | --- | ---: | ---: |
-| `division` | 50,939 / 50,939 | 100.0% |
-| `division_type` | 50,939 / 50,939 | 100.0% |
-| `proc_type` | 50,939 / 50,939 | 100.0% |
-| `merged_cases` | 50,936 / 50,939 | 100.0% |
-| `language` | 50,776 / 50,939 | 99.7% |
-| `source_date` | 50,670 / 50,939 | 99.5% |
-| `proc_duration` | 50,663 / 50,939 | 99.5% |
-| `leading_case` | 49,059 / 50,939 | 96.3% |
-| `source_canton` | 48,797 / 50,939 | 95.8% |
-| `outcome_binary` | 47,988 / 50,939 | 94.2% |
-| `n_judges` | 47,064 / 50,939 | 92.4% |
-| `app_class` | 46,513 / 50,939 | 91.3% |
-| `outcome` | 45,449 / 50,939 | 89.2% |
-| `issue` | 44,270 / 50,939 | 86.9% |
-| `app_represented` | 43,856 / 50,939 | 86.1% |
-| `cited_bger` | 42,037 / 50,939 | 82.5% |
-| `resp_represented` | 41,640 / 50,939 | 81.7% |
-| `resp_class` | 39,789 / 50,939 | 78.1% |
-| `topic` | 38,575 / 50,939 | 75.7% |
-| `area_general` | 36,491 / 50,939 | 71.6% |
-| `n_cited_bger` | 34,044 / 50,939 | 66.8% |
-| `area_intermediate` | 31,122 / 50,939 | 61.1% |
-| `area_detailed` | 28,762 / 50,939 | 56.5% |
+| `division` | 71,508 / 71,508 | 100.0% |
+| `division_type` | 71,508 / 71,508 | 100.0% |
+| `proc_type` | 71,508 / 71,508 | 100.0% |
+| `merged_cases` | 71,504 / 71,508 | 100.0% |
+| `language` | 71,209 / 71,508 | 99.6% |
+| `source_date` | 71,154 / 71,508 | 99.5% |
+| `proc_duration` | 71,142 / 71,508 | 99.5% |
+| `leading_case` | 68,831 / 71,508 | 96.3% |
+| `source_canton` | 68,402 / 71,508 | 95.7% |
+| `outcome_binary` | 67,379 / 71,508 | 94.2% |
+| `n_judges` | 65,902 / 71,508 | 92.2% |
+| `app_class` | 64,850 / 71,508 | 90.7% |
+| `outcome` | 63,921 / 71,508 | 89.4% |
+| `issue` | 62,656 / 71,508 | 87.6% |
+| `app_represented` | 61,474 / 71,508 | 86.0% |
+| `resp_represented` | 57,597 / 71,508 | 80.5% |
+| `resp_class` | 55,586 / 71,508 | 77.7% |
+| `topic` | 54,768 / 71,508 | 76.6% |
+| `area_general` | 50,895 / 71,508 | 71.2% |
+| `area_intermediate` | 42,968 / 71,508 | 60.1% |
+| `cited_bger` | 42,067 / 71,508 | 58.8% |
+| `area_detailed` | 39,846 / 71,508 | 55.7% |
+| `n_cited_bger` | 34,076 / 71,508 | 47.7% |
+| `n_cited_bge` | 32,733 / 71,508 | 45.8% |
+| `cited_bge` | 31,801 / 71,508 | 44.5% |
 
 These numbers are a diagnostic snapshot, not a full-dataset quality statement.
 Regenerate them after a full annotation run with:
