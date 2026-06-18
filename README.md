@@ -225,19 +225,19 @@ make compare-ground-truth
 
 The current local comparison outputs are based on the current
 `data/processed/scd_annotations.parquet`. The current local data directory
-contains 80,715 raw HTML files and 80,533 extracted text JSON files, per-case
+contains 87,760 raw HTML files and 87,606 extracted text JSON files, per-case
 annotation JSON files, and aggregate annotation rows. Of those annotated
 predictions in the aggregate parquet:
 
-- 80,533 predictions were compared.
-- 76,096 rows matched a ground-truth row on `docref` and `date`.
-- 4,437 rows had no matching ground-truth row and are marked as `missing_ground_truth`.
-- The matched rows have 500,291 field-level mismatches across all compared columns.
+- 87,606 predictions were compared.
+- 83,158 rows matched a ground-truth row on `docref` and `date`.
+- 4,448 rows had no matching ground-truth row and are marked as `missing_ground_truth`.
+- The matched rows have 543,995 field-level mismatches across all compared columns.
 - Exact-match fields in the matched subset: `division`, `division_type`,
   `doi_version`, `proc_type`, `year`.
 - The earlier large `merged_cases` disagreement was caused by scanning the full
   judgment body for docket citations. The parser now only uses the judgment head,
-  and `merged_cases` has 4 mismatches in the matched subset.
+  and `merged_cases` has 8 mismatches in the matched subset.
 - Most unmatched rows are legacy-style docket numbers from 2006-2008, such as
   `2007.I_*`, `2007.U_*`, `1A_*`, `2P_*`, `4C_*`, `5P_*`, `6P_*`, and `6S_*`.
   These are not matched because the SCD ground-truth dataset primarily covers
@@ -252,31 +252,31 @@ Selected match rates for substantively relevant variables:
 
 | Field | Matches / Matched Rows | Match Rate |
 | --- | ---: | ---: |
-| `division` | 76,096 / 76,096 | 100.0% |
-| `division_type` | 76,096 / 76,096 | 100.0% |
-| `proc_type` | 76,096 / 76,096 | 100.0% |
-| `merged_cases` | 76,092 / 76,096 | 100.0% |
-| `language` | 75,784 / 76,096 | 99.6% |
-| `source_date` | 75,726 / 76,096 | 99.5% |
-| `proc_duration` | 75,714 / 76,096 | 99.5% |
-| `leading_case` | 73,261 / 76,096 | 96.3% |
-| `source_canton` | 72,780 / 76,096 | 95.6% |
-| `outcome_binary` | 71,738 / 76,096 | 94.3% |
-| `n_judges` | 70,207 / 76,096 | 92.3% |
-| `app_class` | 68,916 / 76,096 | 90.6% |
-| `outcome` | 68,064 / 76,096 | 89.4% |
-| `issue` | 66,828 / 76,096 | 87.8% |
-| `app_represented` | 65,427 / 76,096 | 86.0% |
-| `resp_represented` | 61,158 / 76,096 | 80.4% |
-| `resp_class` | 59,076 / 76,096 | 77.6% |
-| `topic` | 58,357 / 76,096 | 76.7% |
-| `area_general` | 54,037 / 76,096 | 71.0% |
-| `area_intermediate` | 45,550 / 76,096 | 59.9% |
-| `cited_bger` | 42,165 / 76,096 | 55.4% |
-| `area_detailed` | 42,295 / 76,096 | 55.6% |
-| `n_cited_bger` | 34,143 / 76,096 | 44.9% |
-| `n_cited_bge` | 34,712 / 76,096 | 45.6% |
-| `cited_bge` | 33,780 / 76,096 | 44.4% |
+| `division` | 83,158 / 83,158 | 100.0% |
+| `division_type` | 83,158 / 83,158 | 100.0% |
+| `proc_type` | 83,158 / 83,158 | 100.0% |
+| `merged_cases` | 83,150 / 83,158 | 100.0% |
+| `language` | 82,825 / 83,158 | 99.6% |
+| `source_date` | 82,770 / 83,158 | 99.5% |
+| `proc_duration` | 82,755 / 83,158 | 99.5% |
+| `leading_case` | 80,121 / 83,158 | 96.3% |
+| `source_canton` | 79,506 / 83,158 | 95.6% |
+| `outcome_binary` | 78,463 / 83,158 | 94.4% |
+| `n_judges` | 76,791 / 83,158 | 92.3% |
+| `app_class` | 75,314 / 83,158 | 90.6% |
+| `outcome` | 74,488 / 83,158 | 89.6% |
+| `issue` | 73,291 / 83,158 | 88.1% |
+| `app_represented` | 71,576 / 83,158 | 86.1% |
+| `resp_represented` | 66,751 / 83,158 | 80.3% |
+| `resp_class` | 64,565 / 83,158 | 77.6% |
+| `topic` | 64,002 / 83,158 | 77.0% |
+| `area_general` | 58,897 / 83,158 | 70.8% |
+| `area_intermediate` | 49,480 / 83,158 | 59.5% |
+| `cited_bger` | 48,544 / 83,158 | 58.4% |
+| `area_detailed` | 46,006 / 83,158 | 55.3% |
+| `n_cited_bger` | 38,382 / 83,158 | 46.2% |
+| `n_cited_bge` | 37,429 / 83,158 | 45.0% |
+| `cited_bge` | 36,488 / 83,158 | 43.9% |
 
 These numbers are a diagnostic snapshot, not a full-dataset quality statement.
 Regenerate them after a full annotation run with:
