@@ -18,6 +18,7 @@ from parsers import (  # noqa: E402
     division_from_docref,
     division_type_from_division,
     extract_citations,
+    extract_docref,
     extract_merged_cases,
     extract_judges,
     extract_outcome,
@@ -125,6 +126,16 @@ def test_codebook_mappings_from_docref_and_dates() -> None:
     assert division_type_from_division("2. Civil") == "Civil"
     assert division_from_docref("8C_1/2024", "2024-01-05") == "4. Public"
     assert days_between("2018-05-03", "2017-08-16") == 260
+
+
+def test_extract_docref_prefers_registry_docid_for_merged_cases() -> None:
+    paragraphs = [
+        "2C_889/2020, 2C_890/2020",
+        "Arrêt du 4 novembre 2020",
+    ]
+    registry_record = {"docid": "aza://04-11-2020-2C_890-2020"}
+
+    assert extract_docref(paragraphs, registry_record) == "2C_890/2020"
 
 
 def test_extract_judges_multilingual_blocks() -> None:

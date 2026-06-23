@@ -4,7 +4,7 @@ IN_DOCKER := $(wildcard /.dockerenv)
 OLLAMA_HOST ?= http://ollama:11434
 OLLAMA_MODEL ?= qwen3:0.6b
 SCRAPE_START ?= 01.07.2007
-SCRAPE_END ?= 09.06.2026
+SCRAPE_END ?= 23.06.2026
 SCRAPE_SLEEP ?= 2
 SCRAPE_ARGS ?=
 

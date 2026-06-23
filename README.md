@@ -77,7 +77,7 @@ make scrape
 The Make target defaults to:
 
 ```bash
-uv run src/scrape/run_scrape.py --start-date 01.07.2007 --end-date 09.06.2026 --sleep-seconds 2
+uv run src/scrape/run_scrape.py --start-date 01.07.2007 --end-date 23.06.2026 --sleep-seconds 2
 ```
 
 Important scraper behavior:
@@ -225,24 +225,24 @@ make compare-ground-truth
 
 The current local comparison outputs are based on the current
 `data/processed/scd_annotations.parquet`. The current local data directory
-contains 87,760 raw HTML files and 87,606 extracted text JSON files, per-case
-annotation JSON files, and aggregate annotation rows. Of those annotated
-predictions in the aggregate parquet:
+contains 142,556 raw HTML files, extracted text JSON files, per-case annotation
+JSON files, and aggregate annotation rows. Of those annotated predictions in the
+aggregate parquet:
 
-- 87,606 predictions were compared.
-- 83,158 rows matched a ground-truth row on `docref` and `date`.
-- 4,448 rows had no matching ground-truth row and are marked as `missing_ground_truth`.
-- The matched rows have 543,995 field-level mismatches across all compared columns.
+- 142,556 predictions were compared.
+- 121,975 rows matched a ground-truth row on `docref` and `date`.
+- 20,581 rows had no matching ground-truth row and are marked as `missing_ground_truth`.
+- The matched rows have 792,587 field-level mismatches across all compared columns.
 - Exact-match fields in the matched subset: `division`, `division_type`,
   `doi_version`, `proc_type`, `year`.
 - The earlier large `merged_cases` disagreement was caused by scanning the full
   judgment body for docket citations. The parser now only uses the judgment head,
-  and `merged_cases` has 8 mismatches in the matched subset.
-- Most unmatched rows are legacy-style docket numbers from 2006-2008, such as
-  `2007.I_*`, `2007.U_*`, `1A_*`, `2P_*`, `4C_*`, `5P_*`, `6P_*`, and `6S_*`.
-  These are not matched because the SCD ground-truth dataset primarily covers
-  ordinary dossiers under the Federal Supreme Court Act and does not include
-  many of these legacy-format cases.
+  and `merged_cases` has 20 mismatches in the matched subset.
+- Most unmatched rows are outside the released SCD ground-truth coverage. The
+  matched ground-truth rows currently run through 2024-03-28, while 16,052
+  unmatched rows are dated 2024 or later. Another 4,529 unmatched rows are
+  earlier cases, concentrated in legacy-style docket numbers from 2006-2008 such
+  as `2007.I_*`, `2007.U_*`, `1A_*`, `2P_*`, `4C_*`, `5P_*`, `6P_*`, and `6S_*`.
 - The largest remaining substantive disagreements are in area labels, party
   representation/class labels, outcome nuance, topic/issue text, and BGE/BGer
   citation counts. `url` and `length` are intentionally omitted below because
@@ -252,31 +252,33 @@ Selected match rates for substantively relevant variables:
 
 | Field | Matches / Matched Rows | Match Rate |
 | --- | ---: | ---: |
-| `division` | 83,158 / 83,158 | 100.0% |
-| `division_type` | 83,158 / 83,158 | 100.0% |
-| `proc_type` | 83,158 / 83,158 | 100.0% |
-| `merged_cases` | 83,150 / 83,158 | 100.0% |
-| `language` | 82,825 / 83,158 | 99.6% |
-| `source_date` | 82,770 / 83,158 | 99.5% |
-| `proc_duration` | 82,755 / 83,158 | 99.5% |
-| `leading_case` | 80,121 / 83,158 | 96.3% |
-| `source_canton` | 79,506 / 83,158 | 95.6% |
-| `outcome_binary` | 78,463 / 83,158 | 94.4% |
-| `n_judges` | 76,791 / 83,158 | 92.3% |
-| `app_class` | 75,314 / 83,158 | 90.6% |
-| `outcome` | 74,488 / 83,158 | 89.6% |
-| `issue` | 73,291 / 83,158 | 88.1% |
-| `app_represented` | 71,576 / 83,158 | 86.1% |
-| `resp_represented` | 66,751 / 83,158 | 80.3% |
-| `resp_class` | 64,565 / 83,158 | 77.6% |
-| `topic` | 64,002 / 83,158 | 77.0% |
-| `area_general` | 58,897 / 83,158 | 70.8% |
-| `area_intermediate` | 49,480 / 83,158 | 59.5% |
-| `cited_bger` | 48,544 / 83,158 | 58.4% |
-| `area_detailed` | 46,006 / 83,158 | 55.3% |
-| `n_cited_bger` | 38,382 / 83,158 | 46.2% |
-| `n_cited_bge` | 37,429 / 83,158 | 45.0% |
-| `cited_bge` | 36,488 / 83,158 | 43.9% |
+| `division` | 121,975 / 121,975 | 100.0% |
+| `division_type` | 121,975 / 121,975 | 100.0% |
+| `doi_version` | 121,975 / 121,975 | 100.0% |
+| `proc_type` | 121,975 / 121,975 | 100.0% |
+| `year` | 121,975 / 121,975 | 100.0% |
+| `merged_cases` | 121,955 / 121,975 | 100.0% |
+| `language` | 121,531 / 121,975 | 99.6% |
+| `source_date` | 121,376 / 121,975 | 99.5% |
+| `proc_duration` | 121,341 / 121,975 | 99.5% |
+| `leading_case` | 117,984 / 121,975 | 96.7% |
+| `source_canton` | 116,499 / 121,975 | 95.5% |
+| `outcome_binary` | 115,454 / 121,975 | 94.7% |
+| `n_judges` | 111,188 / 121,975 | 91.2% |
+| `app_class` | 110,016 / 121,975 | 90.2% |
+| `outcome` | 109,772 / 121,975 | 90.0% |
+| `issue` | 108,889 / 121,975 | 89.3% |
+| `app_represented` | 104,943 / 121,975 | 86.0% |
+| `resp_represented` | 96,636 / 121,975 | 79.2% |
+| `resp_class` | 93,928 / 121,975 | 77.0% |
+| `topic` | 95,567 / 121,975 | 78.3% |
+| `area_general` | 85,499 / 121,975 | 70.1% |
+| `area_intermediate` | 70,699 / 121,975 | 58.0% |
+| `cited_bger` | 86,481 / 121,975 | 70.9% |
+| `area_detailed` | 65,784 / 121,975 | 53.9% |
+| `n_cited_bger` | 60,992 / 121,975 | 50.0% |
+| `n_cited_bge` | 49,924 / 121,975 | 40.9% |
+| `cited_bge` | 48,152 / 121,975 | 39.5% |
 
 These numbers are a diagnostic snapshot, not a full-dataset quality statement.
 Regenerate them after a full annotation run with:

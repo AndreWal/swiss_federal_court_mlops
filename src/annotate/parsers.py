@@ -44,26 +44,24 @@ def first_match(pattern: re.Pattern[str], values: Sequence[str]) -> str | None:
 def docref_from_docid(docid: str | None) -> str | None:
     if not docid:
         return None
-    tail = docid.rsplit("-", maxsplit=3)
-    if len(tail) < 4:
+    match = re.search(r"([1-9][A-Z][_.]\d+)-(\d{4})$", docid)
+    if not match:
         return None
-    prefix = tail[-3]
-    number = tail[-2]
-    year = tail[-1]
-    if not prefix or not number or not year.isdigit():
-        return None
-    sep = "_" if prefix[-1].isalpha() else "."
-    return f"{prefix}{sep}{number}/{year}"
+    case_number, year = match.groups()
+    return f"{case_number.replace('.', '_')}/{year}"
 
 
 def extract_docref(paragraphs: Sequence[str], registry_record: Mapping[str, Any] | None) -> str | None:
+    if registry_record is not None:
+        docid = registry_record.get("docid")
+        registry_docref = docref_from_docid(docid if isinstance(docid, str) else None)
+        if registry_docref is not None:
+            return registry_docref
+
     docref = first_match(CASE_RE, paragraphs[:12])
     if docref is not None:
         return docref.replace(".", "_")
-    if registry_record is None:
-        return None
-    docid = registry_record.get("docid")
-    return docref_from_docid(docid if isinstance(docid, str) else None)
+    return None
 
 
 def parse_date_text(value: str) -> date | None:
